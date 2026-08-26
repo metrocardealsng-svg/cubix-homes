@@ -69,7 +69,9 @@ button{border:none;background:none;cursor:pointer;font-family:inherit;color:inhe
 /* ── NAVBAR ── */
 #nav{position:fixed;top:0;left:0;right:0;z-index:900;padding:1.2rem 5vw;display:flex;align-items:center;justify-content:space-between;transition:background .5s,backdrop-filter .5s,padding .4s;}
 #nav.solid{background:rgba(8,8,8,.94);backdrop-filter:blur(14px);padding:.9rem 5vw}
-.n-brand{background:transparent;padding:0;display:flex;align-items:center;transition:opacity .3s;flex-shrink:0;}
+.n-brand{background:transparent;padding:0;display:flex;align-items:center;gap:.55rem;transition:opacity .3s;flex-shrink:0;}
+.n-logo-icon{height:38px;display:block;mix-blend-mode:screen;filter:brightness(1.15);}
+.n-logo-text{font-family:var(--fb);font-size:1.35rem;font-weight:700;letter-spacing:.08em;color:#ffffff;text-transform:uppercase;line-height:1;}
 .n-brand:hover{opacity:.85}
 .n-brand img{height:88px;display:block;mix-blend-mode:screen;filter:drop-shadow(0 0 14px rgba(240,192,48,0.35)) brightness(1.15);}
 .n-links{display:flex;gap:2.2rem;list-style:none}
@@ -401,7 +403,8 @@ button{border:none;background:none;cursor:pointer;font-family:inherit;color:inhe
 <!-- NAVBAR -->
 <nav id="nav" aria-label="Main navigation">
   <a href="#" class="n-brand" aria-label="CUBIX Home">
-    <img src="assets/logo.png" alt="CUBIX"/>
+    <img src="assets/logo.png" alt="CUBIX" class="n-logo-icon"/>
+    <span class="n-logo-text">CUBIX</span>
   </a>
   <ul class="n-links" role="list">
     <li><a href="#about">About</a></li>
