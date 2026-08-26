@@ -67,11 +67,11 @@ button{border:none;background:none;cursor:pointer;font-family:inherit;color:inhe
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 
 /* ── NAVBAR ── */
-#nav{position:fixed;top:0;left:0;right:0;z-index:900;padding:1.4rem 4vw;display:flex;align-items:center;justify-content:space-between;transition:background .5s,backdrop-filter .5s,padding .4s;}
-#nav.solid{background:rgba(8,8,8,.94);backdrop-filter:blur(14px);padding:1rem 4vw}
-.n-brand{background:transparent;padding:0;display:flex;align-items:center;transition:opacity .3s;}
+#nav{position:fixed;top:0;left:0;right:0;z-index:900;padding:1.2rem 5vw;display:flex;align-items:center;justify-content:space-between;transition:background .5s,backdrop-filter .5s,padding .4s;}
+#nav.solid{background:rgba(8,8,8,.94);backdrop-filter:blur(14px);padding:.9rem 5vw}
+.n-brand{background:transparent;padding:0;display:flex;align-items:center;transition:opacity .3s;flex-shrink:0;}
 .n-brand:hover{opacity:.85}
-.n-brand img{height:52px;display:block;filter:drop-shadow(0 0 8px rgba(240,192,48,0.25));}
+.n-brand img{height:64px;display:block;mix-blend-mode:screen;filter:drop-shadow(0 0 10px rgba(240,192,48,0.3)) brightness(1.1);}
 .n-links{display:flex;gap:2.2rem;list-style:none}
 .n-links a{font-size:.64rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(250,249,246,.6);transition:color .3s;position:relative;}
 .n-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--gold);transition:width .3s var(--ease)}
@@ -356,10 +356,11 @@ button{border:none;background:none;cursor:pointer;font-family:inherit;color:inhe
   .re-grid{grid-template-columns:1fr 1fr}
 }
 @media(max-width:768px){
-  #nav{padding:1.1rem 1.5rem}
-  #nav.solid{padding:.85rem 1.5rem}
+  #nav{padding:1.1rem 1.2rem}
+  #nav.solid{padding:.9rem 1.2rem}
   .n-links,.n-book{display:none}
   .n-ham{display:flex}
+  .n-brand img{height:48px}
   .h-copy{bottom:8vh;left:1.4rem;right:1.4rem;max-width:none}
   .pj-grid,.re-grid{grid-template-columns:1fr}
   .pj-card{aspect-ratio:4/3}
