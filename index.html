@@ -69,10 +69,9 @@ button{border:none;background:none;cursor:pointer;font-family:inherit;color:inhe
 /* ── NAVBAR ── */
 #nav{position:fixed;top:0;left:0;right:0;z-index:900;padding:1.2rem 5vw;display:flex;align-items:center;justify-content:space-between;transition:background .5s,backdrop-filter .5s,padding .4s;}
 #nav.solid{background:rgba(8,8,8,.94);backdrop-filter:blur(14px);padding:.9rem 5vw}
-.n-brand{background:transparent;padding:0;display:flex;align-items:center;gap:.6rem;transition:opacity .3s;flex-shrink:0;text-decoration:none;}
-.n-brand:hover{opacity:.8}
-.n-logo-icon{width:32px;height:32px;flex-shrink:0;}
-.n-logo-text{font-family:var(--fb);font-size:1.4rem;font-weight:700;letter-spacing:.1em;color:#ffffff;text-transform:uppercase;line-height:1;white-space:nowrap;}
+.n-brand{background:transparent;padding:0;display:flex;align-items:center;transition:opacity .3s;flex-shrink:0;text-decoration:none;}
+.n-brand:hover{opacity:.75}
+.n-logo-svg{height:48px;width:auto;flex-shrink:0;}
 .n-brand:hover{opacity:.85}
 
 .n-links{display:flex;gap:2.2rem;list-style:none}
@@ -404,17 +403,23 @@ button{border:none;background:none;cursor:pointer;font-family:inherit;color:inhe
 <!-- NAVBAR -->
 <nav id="nav" aria-label="Main navigation">
   <a href="#" class="n-brand" aria-label="CUBIX Home">
-    <svg class="n-logo-icon" width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <polygon points="50,8 92,32 92,68 50,92 8,68 8,32" fill="none" stroke="#f0c030" stroke-width="5"/>
-      <polygon points="50,22 78,38 78,62 50,78 22,62 22,38" fill="none" stroke="#f0c030" stroke-width="3"/>
-      <line x1="50" y1="8" x2="50" y2="22" stroke="#f0c030" stroke-width="3"/>
-      <line x1="92" y1="32" x2="78" y2="38" stroke="#f0c030" stroke-width="3"/>
-      <line x1="92" y1="68" x2="78" y2="62" stroke="#f0c030" stroke-width="3"/>
-      <line x1="50" y1="92" x2="50" y2="78" stroke="#f0c030" stroke-width="3"/>
-      <line x1="8" y1="68" x2="22" y2="62" stroke="#f0c030" stroke-width="3"/>
-      <line x1="8" y1="32" x2="22" y2="38" stroke="#f0c030" stroke-width="3"/>
-    </svg>
-    <span class="n-logo-text">CUBIX</span>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 60" fill="none" class="n-logo-svg">
+  <!-- "cubix" white text -->
+  <text x="0" y="44" font-family="Space Grotesk, Arial, sans-serif" font-size="40" font-weight="600" fill="#ffffff" letter-spacing="-1">cubix</text>
+  <!-- Gold hexagon cube icon -->
+  <g transform="translate(148, 4)">
+    <!-- Outer hexagon -->
+    <polygon points="26,2 50,15 50,44 26,57 2,44 2,15" fill="#f0c030"/>
+    <!-- White cutout cube shape inside -->
+    <polygon points="26,13 40,21 40,37 26,45 12,37 12,21" fill="none" stroke="#ffffff" stroke-width="0"/>
+    <!-- Top face of cube (white) -->
+    <polygon points="26,13 40,21 26,29 12,21" fill="#ffffff"/>
+    <!-- Left face (slightly off-white) -->
+    <polygon points="12,21 26,29 26,45 12,37" fill="#e8e0cc"/>
+    <!-- Right face (gold darker) -->
+    <polygon points="40,21 40,37 26,45 26,29" fill="#c9a020"/>
+  </g>
+</svg>
   </a>
   <ul class="n-links" role="list">
     <li><a href="#about">About</a></li>
@@ -780,15 +785,15 @@ button{border:none;background:none;cursor:pointer;font-family:inherit;color:inhe
     <div class="ft-grid">
       <div>
         <div class="ft-brand">
-          <svg width="24" height="24" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <polygon points="50,8 92,32 92,68 50,92 8,68 8,32" fill="none" stroke="#f0c030" stroke-width="5"/>
-            <polygon points="50,22 78,38 78,62 50,78 22,62 22,38" fill="none" stroke="#f0c030" stroke-width="3"/>
-            <line x1="50" y1="8" x2="50" y2="22" stroke="#f0c030" stroke-width="3"/>
-            <line x1="92" y1="32" x2="78" y2="38" stroke="#f0c030" stroke-width="3"/>
-            <line x1="50" y1="92" x2="50" y2="78" stroke="#f0c030" stroke-width="3"/>
-            <line x1="8" y1="32" x2="22" y2="38" stroke="#f0c030" stroke-width="3"/>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 60" fill="none" style="height:38px;width:auto">
+            <text x="0" y="44" font-family="Space Grotesk, Arial, sans-serif" font-size="40" font-weight="600" fill="#ffffff" letter-spacing="-1">cubix</text>
+            <g transform="translate(148, 4)">
+              <polygon points="26,2 50,15 50,44 26,57 2,44 2,15" fill="#f0c030"/>
+              <polygon points="26,13 40,21 26,29 12,21" fill="#ffffff"/>
+              <polygon points="12,21 26,29 26,45 12,37" fill="#e8e0cc"/>
+              <polygon points="40,21 40,37 26,45 26,29" fill="#c9a020"/>
+            </g>
           </svg>
-          <span style="font-family:var(--fb);font-size:1.1rem;font-weight:700;letter-spacing:.1em;color:#fff;text-transform:uppercase;margin-left:.4rem">CUBIX</span>
         </div>
         <p class="ft-about">CUBIX Homes and Investment Limited — premium construction, architecture and real estate development across Nigeria.</p>
       </div>
