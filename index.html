@@ -1070,7 +1070,7 @@ let lenis;
 
 function initScroll() {
   const reduced = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-  if (reduced) { setHeroFrame(FRAME_COUNT - 1); initReveal(); return; }
+  if (reduced) { setHeroFrame(FRAME_COUNT - 1); return; }
 
   lenis = new Lenis({
     duration: 1.4,
@@ -1128,6 +1128,8 @@ function initScroll() {
       }
     }
   });
+
+  initReveal();
 
   /* SEQ2 PIN — 10x = 1000vh */
 
@@ -1251,8 +1253,19 @@ window.addEventListener('resize', () => {
   resizeT = setTimeout(() => {
     hResize(); 
     if (hFrames[hCurIdx]) drawHero(hFrames[hCurIdx], hVW, hVH);
-        if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+    if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
   }, 200);
+});
+
+window.addEventListener('load', () => {
+  if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+  document.querySelectorAll('img').forEach(img => {
+    if (!img.complete) {
+      img.addEventListener('load', () => {
+        if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+      }, { once: true });
+    }
+  });
 });
 
 /* ============================================================
