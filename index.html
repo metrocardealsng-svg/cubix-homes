@@ -368,45 +368,36 @@ button{border:none;background:none;cursor:pointer;font-family:inherit;color:inhe
   *{animation-duration:.01ms!important;transition-duration:.01ms!important}
 }
 
-/* ── LOGO ── */
+/* NAV LOGO */
 .n-brand{background:transparent;padding:0;display:flex;align-items:center;flex-shrink:0;text-decoration:none;transition:opacity .3s;}
 .n-brand:hover{opacity:.8}
-.n-logo-img{height:50px;width:auto;display:block;background:rgba(255,255,255,.08);border-radius:6px;padding:.25rem .5rem;}
-.ft-logo-img{height:40px;width:auto;display:block;background:rgba(255,255,255,.08);border-radius:4px;padding:.2rem .4rem;margin-bottom:1rem;}
-
-/* ── OVERFLOW / LAYER FIXES ── */
-*,*::before,*::after{box-sizing:border-box}
+.n-logo-img{height:48px;width:auto;display:block;background:rgba(255,255,255,.1);border-radius:6px;padding:.2rem .5rem;}
+/* FOOTER LOGO */
+.ft-logo-img{height:38px;width:auto;display:block;background:rgba(255,255,255,.1);border-radius:4px;padding:.2rem .4rem;margin-bottom:1rem;}
+/* OVERFLOW FIX */
 html,body{overflow-x:hidden;max-width:100vw;}
-.sec{position:relative;overflow:hidden;}
 img{max-width:100%;height:auto;}
-
-/* ── MOB BAR — fixed bottom, safe area, never overlaps ── */
-#mob-bar{
-  position:fixed;bottom:0;left:0;right:0;z-index:800;
-  display:none;
+/* MOB BAR */
+#mob-bar{position:fixed;bottom:0;left:0;right:0;z-index:800;display:none;
   box-shadow:0 -2px 20px rgba(0,0,0,.5);
-  padding-bottom:env(safe-area-inset-bottom,0px);
-}
+  padding-bottom:env(safe-area-inset-bottom,0px);}
 #mob-bar.show{display:flex;}
-.mob-bar-btn{
-  flex:1;padding:1rem .5rem;text-align:center;font-size:.6rem;
-  font-weight:700;letter-spacing:.18em;text-transform:uppercase;
-  display:flex;align-items:center;justify-content:center;gap:.4rem;
-  border:none;cursor:pointer;font-family:var(--fb);transition:opacity .2s;
-}
-.mob-bar-btn:hover{opacity:.85}
+.mob-bar-btn{flex:1;padding:1rem .5rem;text-align:center;font-size:.6rem;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;display:flex;align-items:center;
+  justify-content:center;gap:.4rem;border:none;cursor:pointer;font-family:var(--fb);}
 .mb-wa{background:var(--gold);color:var(--black);}
 .mb-bc{background:var(--charcoal);color:var(--white);border-left:1px solid var(--mid);}
-
-/* ── BODY PADDING for fixed mob bar ── */
-@media(max-width:768px){
-  body{padding-bottom:calc(56px + env(safe-area-inset-bottom,0px));}
-  #mob-bar{display:flex;}
-}
-@media(min-width:769px){
-  #mob-bar{display:none!important;}
-  body{padding-bottom:0;}
-}
+@media(max-width:768px){body{padding-bottom:calc(56px + env(safe-area-inset-bottom,0px))}#mob-bar{display:flex}}
+@media(min-width:769px){#mob-bar{display:none!important}body{padding-bottom:0}}
+/* BA section */
+.ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.ba-card{position:relative;overflow:hidden;}
+.ba-card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform .6s;}
+.ba-card:hover img{transform:scale(1.04);}
+.ba-label{position:absolute;top:1rem;left:1rem;z-index:2;font-size:.58rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;padding:.3rem .75rem;}
+.before-label{background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.2);}
+.after-label{background:var(--gold);color:var(--black);}
+@media(max-width:600px){.ba-grid{grid-template-columns:1fr;}}
 
 </style>
 </head>
@@ -440,7 +431,6 @@ img{max-width:100%;height:auto;}
   </button>
 </nav>
 
-<!-- Mobile Menu -->
 <div id="mob-menu" role="dialog" aria-label="Navigation">
   <ul class="mob-links" role="list">
     <li><a href="#about" class="ml">About Cubix</a></li>
@@ -453,10 +443,7 @@ img{max-width:100%;height:auto;}
     <button class="mob-wa ml" onclick="openWA();closeMob()">WhatsApp Us</button>
     <button class="mob-bc ml" onclick="openBooking();closeMob()">Book a Call</button>
   </div>
-  <p class="mob-info">cubixhomesltd@gmail.com<br/>+234 706 669 3803</p>
-</div>
 
-<!-- HERO — 300-FRAME SEQUENCE -->
 <section id="hero" aria-label="CUBIX construction sequence">
   <div class="h-pin">
     <canvas id="h-canvas" role="img" aria-label="CUBIX construction transformation"></canvas>
@@ -485,32 +472,66 @@ img{max-width:100%;height:auto;}
     <div id="h-progress"><div id="h-progress-fill"></div></div>
   </div>
 </section>
-<section id="about" class="sec">
+
+<!-- ABOUT CUBIX -->
+<section id="about" class="sec" style="background:var(--cream);color:var(--black);padding:9rem 0 8rem;">
   <div class="wrap">
-    <p class="s-label rv">About CUBIX</p>
+    <p class="s-label rv" style="color:var(--black);"><span style="width:26px;height:1px;background:var(--black);display:inline-block;margin-right:.8rem;vertical-align:middle;"></span>About Cubix</p>
+
+    <!-- Team -->
+    <h2 class="fo-intro rv">THE PEOPLE<br/><em>BEHIND CUBIX.</em></h2>
+    <div class="fo-grid" style="margin-bottom:6rem;">
+      <div class="fo-card rv">
+        <div class="fo-img-wrap rvc"><img src="assets/arc-muhammed.jpeg" alt="Arc. Mohammed Sadiq" loading="lazy"/></div>
+        <div>
+          <h3 class="fo-name">Arc. Mohammed Sadiq</h3>
+          <p class="fo-role">Co-Founder · Principal Architect</p>
+          <p class="fo-body">A licensed architect with a proven track record in high-level, precise architectural design and construction. Arc. Mohammed co-founded CUBIX to bring a new standard of quality to Nigeria's built environment.</p>
+          <div style="display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1rem;">
+            <button class="fo-contact" onclick="openWADirect('2347066693803','Arc. Mohammed Sadiq')">WhatsApp →</button>
+            <a class="fo-contact" href="tel:+2347066693803">Call →</a>
+          </div>
+        </div>
+      </div>
+      <div class="fo-card rv">
+        <div class="fo-img-wrap rvc"><img src="assets/arc-chimzy.jpeg" alt="Arc. Chimzi Kel-Owhonda" loading="lazy"/></div>
+        <div>
+          <h3 class="fo-name">Arc. Chimzi Kel-Owhonda</h3>
+          <p class="fo-role">Co-Founder · Principal Architect</p>
+          <p class="fo-body">A licensed architect bringing deep real estate experience to every CUBIX project. Arc. Chimzi ensures your building investment is at its safest — from concept to completion.</p>
+          <div style="display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1rem;">
+            <button class="fo-contact" onclick="openWADirect('2347078396158','Arc. Chimzi Kel-Owhonda')">WhatsApp →</button>
+            <a class="fo-contact" href="tel:+2347078396158">Call →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- About body -->
     <div class="ab-grid">
       <div>
         <h2 class="ab-title rv">BUILT WITH<br/><em>PURPOSE.</em></h2>
         <p class="ab-body rv">CUBIX Homes and Investment Limited is a construction and real estate company founded by two licensed architects with a knack for high-level, precise design, construction, and real estate.</p>
-        <p class="ab-body rv">Over a short period, CUBIX has handled a list of high-profile construction projects across various states in Nigeria — Lagos, Abuja, Port Harcourt — proving that quality and speed are not mutually exclusive.</p>
-        <blockquote class="ab-quote rv">"With a wealth of Real Estate experience and Building Professionalism by the licensed architects in charge, your building investment is at its safest under our belt."</blockquote>
-        <p class="ab-body rv">We do not build buildings. We build legacies. Every detail, every material, every line is considered. Every deadline matters. Every client's vision is treated as sacred.</p>
+        <p class="ab-body rv">Over a short period, CUBIX has handled high-profile projects across Lagos, Abuja and Port Harcourt — proving that quality and speed are not mutually exclusive.</p>
+        <blockquote class="ab-quote rv">"With a wealth of Real Estate experience and Building Professionalism by our licensed architects, your investment is at its safest under our belt."</blockquote>
+        <p class="ab-body rv">Founded in 2024, we set out to treat every project as a personal statement of excellence. This is only the beginning.</p>
         <div class="ab-stats">
           <div class="rv"><p class="stn">50<span>+</span></p><p class="stl">Projects Delivered</p></div>
           <div class="rv"><p class="stn">3<span>+</span></p><p class="stl">States Active</p></div>
-          <div class="rv"><p class="stn">2<span>+</span></p><p class="stl">Years Founded</p></div>
+          <div class="rv"><p class="stn">2024</p><p class="stl">Year Founded</p></div>
           <div class="rv"><p class="stn">100<span>%</span></p><p class="stl">Licensed Architects</p></div>
         </div>
       </div>
       <div class="ab-imgs">
-        <div class="ab-img rvc"><img src="assets/project6.jpeg" alt="CUBIX completed residential project" loading="lazy"/></div>
-        <div class="ab-img rvc"><img src="assets/project5.jpeg" alt="CUBIX architectural design" loading="lazy"/></div>
-        <div class="ab-img rvc"><img src="assets/project7.jpeg" alt="CUBIX construction exterior" loading="lazy"/></div>
+        <div class="ab-img rvc"><img src="assets/proj-momo-final.jpg" alt="CUBIX completed commercial build" loading="lazy"/></div>
+        <div class="ab-img rvc"><img src="assets/proj-living-room.jpg" alt="CUBIX interior finish" loading="lazy"/></div>
+        <div class="ab-img rvc"><img src="assets/proj-hilltop-final.jpg" alt="CUBIX Hilltop project" loading="lazy"/></div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- SERVICES -->
 <section id="services" class="sec">
   <div class="wrap">
     <div class="sv-layout">
@@ -577,76 +598,67 @@ img{max-width:100%;height:auto;}
   </div>
 </section>
 
-<section id="projects" class="sec">
+<!-- PROJECTS -->
+<section id="projects" class="sec" style="background:var(--deep);padding:9rem 0;">
   <div class="wrap">
     <div class="pj-head">
       <div>
         <p class="s-label rv">Portfolio</p>
         <h2 class="pj-title rv">OUR<br/><em>WORK.</em></h2>
       </div>
-      <p class="rv" style="max-width:240px;font-size:.8rem;font-weight:300;color:var(--silver);line-height:1.8">A selection of completed and ongoing projects across Nigeria.</p>
-    </div>
     <div class="pj-grid">
-      <div class="pj-card rv"><img src="assets/project1.jpeg" alt="CUBIX luxury villa, Abuja" loading="lazy"/><div class="pj-tag">Residential</div><div class="pj-info"><p class="pj-cat">Residential · Architecture</p><h3 class="pj-name">Luxury Villa — Abuja</h3><p class="pj-loc">FCT, Nigeria</p><button class="pj-enquire" onclick="openWAProject('Luxury Villa Abuja')">Enquire →</button></div></div>
-      <div class="pj-card rv"><img src="assets/project2.jpeg" alt="CUBIX premium duplex, Lagos" loading="lazy"/><div class="pj-tag">Architecture</div><div class="pj-info"><p class="pj-cat">Architecture · Visualization</p><h3 class="pj-name">Premium Duplex — Lagos</h3><p class="pj-loc">Lekki, Lagos</p><button class="pj-enquire" onclick="openWAProject('Premium Duplex Lagos')">Enquire →</button></div></div>
-      <div class="pj-card rv"><img src="assets/project6.jpeg" alt="CUBIX semi-detached duplex" loading="lazy"/><div class="pj-tag">Completed</div><div class="pj-info"><p class="pj-cat">Construction · Residential</p><h3 class="pj-name">Semi-Detached Duplex</h3><p class="pj-loc">Lagos, Nigeria</p><button class="pj-enquire" onclick="openWAProject('Semi-Detached Duplex Lagos')">Enquire →</button></div></div>
-      <div class="pj-card rv"><img src="assets/project3.jpeg" alt="CUBIX contemporary residence" loading="lazy"/><div class="pj-tag">Architecture</div><div class="pj-info"><p class="pj-cat">Architecture · Rendering</p><h3 class="pj-name">Contemporary Residence</h3><p class="pj-loc">Abuja, Nigeria</p><button class="pj-enquire" onclick="openWAProject('Contemporary Residence Abuja')">Enquire →</button></div></div>
-      <div class="pj-card rv"><img src="assets/project4.jpeg" alt="CUBIX modern duplex" loading="lazy"/><div class="pj-tag">Residential</div><div class="pj-info"><p class="pj-cat">Residential · Construction</p><h3 class="pj-name">Modern Duplex</h3><p class="pj-loc">Port Harcourt, Nigeria</p><button class="pj-enquire" onclick="openWAProject('Modern Duplex Port Harcourt')">Enquire →</button></div></div>
-      <div class="pj-card rv"><img src="assets/project7.jpeg" alt="CUBIX residential build" loading="lazy"/><div class="pj-tag">Completed</div><div class="pj-info"><p class="pj-cat">Construction · Completed</p><h3 class="pj-name">Residential Build</h3><p class="pj-loc">Lagos, Nigeria</p><button class="pj-enquire" onclick="openWAProject('Residential Build Lagos')">Enquire →</button></div></div>
+      <div class="pj-card rv"><img src="assets/proj-momo-final.jpg" alt="CUBIX MOMO Commercial Building" loading="lazy"/><div class="pj-tag">Completed</div><div class="pj-info"><p class="pj-cat">Commercial · Construction</p><h3 class="pj-name">MOMO Commercial Building</h3><p class="pj-loc">Nigeria</p><button class="pj-enquire" onclick="openWAProject('MOMO Commercial Building')">Enquire →</button></div></div>
+      <div class="pj-card rv"><img src="assets/proj-hilltop-hotel.jpg" alt="CUBIX Hilltop Hotel" loading="lazy"/><div class="pj-tag">Completed</div><div class="pj-info"><p class="pj-cat">Hospitality · Redevelopment</p><h3 class="pj-name">Hilltop Hotel Redevelopment</h3><p class="pj-loc">Nigeria</p><button class="pj-enquire" onclick="openWAProject('Hilltop Hotel Redevelopment')">Enquire →</button></div></div>
+      <div class="pj-card rv"><img src="assets/proj-hilltop-final.jpg" alt="CUBIX Hilltop Final Project" loading="lazy"/><div class="pj-tag">Completed</div><div class="pj-info"><p class="pj-cat">Construction · Finishing</p><h3 class="pj-name">Hilltop Final Project</h3><p class="pj-loc">Nigeria</p><button class="pj-enquire" onclick="openWAProject('Hilltop Final Project')">Enquire →</button></div></div>
+      <div class="pj-card rv"><img src="assets/proj-lounge-render.jpg" alt="CUBIX Urban Lounge" loading="lazy"/><div class="pj-tag">Design</div><div class="pj-info"><p class="pj-cat">Interior · Commercial Design</p><h3 class="pj-name">Urban Lounge Concept</h3><p class="pj-loc">Nigeria</p><button class="pj-enquire" onclick="openWAProject('Urban Lounge Design')">Enquire →</button></div></div>
+      <div class="pj-card rv"><img src="assets/proj-living-room.jpg" alt="CUBIX Luxury Interior" loading="lazy"/><div class="pj-tag">Interior</div><div class="pj-info"><p class="pj-cat">Interior Design · Luxury</p><h3 class="pj-name">Luxury Living Room Finish</h3><p class="pj-loc">Nigeria</p><button class="pj-enquire" onclick="openWAProject('Luxury Interior Design')">Enquire →</button></div></div>
+      <div class="pj-card rv"><img src="assets/proj-momo-render1.jpg" alt="CUBIX MOMO Render" loading="lazy"/><div class="pj-tag">Design</div><div class="pj-info"><p class="pj-cat">Architecture · 3D Render</p><h3 class="pj-name">MOMO Building — 3D Render</h3><p class="pj-loc">Nigeria</p><button class="pj-enquire" onclick="openWAProject('MOMO Building Render')">Enquire →</button></div></div>
     </div>
   </div>
 </section>
 
-<section id="founders" class="sec" style="background:var(--cream);color:var(--black);padding:9rem 0;">
+<!-- BEFORE & AFTER -->
+<section id="renovations" style="background:var(--black);padding:9rem 0;">
   <div class="wrap">
-    <p class="s-label rv" style="color:var(--black)">Our Story</p>
-    <h2 class="fo-intro rv">THE PEOPLE<br/><em>BEHIND CUBIX.</em></h2>
-    <div class="fo-grid">
-      <div class="fo-card rv">
-        <div class="fo-img-wrap rvc"><img src="assets/arc-muhammed.jpeg" alt="Arc. Mohammed Sadiq" loading="lazy"/></div>
-        <div>
-          <h3 class="fo-name">Arc. Mohammed Sadiq</h3>
-          <p class="fo-role">Co-Founder · Principal Architect</p>
-          <p class="fo-body">A licensed architect with a proven track record in high-level, precise architectural design and construction. Arc. Mohammed co-founded CUBIX to bring a new standard of quality to Nigeria's built environment.</p>
-          <div style="display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1rem;">
-            <button class="fo-contact" onclick="openWADirect('2347066693803','Arc. Mohammed Sadiq')">WhatsApp →</button>
-            <a class="fo-contact" href="tel:+2347066693803">Call →</a>
-          </div>
-        </div>
+    <p class="s-label rv" style="color:var(--gold)">Transformations</p>
+    <h2 class="rv" style="font-family:var(--fd);font-size:clamp(2.5rem,4.5vw,5rem);font-weight:300;letter-spacing:-.02em;margin-bottom:1rem;color:var(--white);">BEFORE &amp;<br/><em>AFTER.</em></h2>
+    <p class="rv" style="font-size:.88rem;font-weight:300;color:var(--silver);line-height:1.8;max-width:540px;margin-bottom:5rem;">We strip spaces back to nothing — then build them into something remarkable.</p>
+    <div class="ba-project rv" style="margin-bottom:5rem;">
+      <div style="margin-bottom:2rem;">
+        <span style="font-size:.58rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);background:rgba(240,192,48,0.1);border:1px solid rgba(240,192,48,0.2);padding:.3rem .8rem;">Mirror Mirror Renovation</span>
       </div>
-      <div class="fo-card rv">
-        <div class="fo-img-wrap rvc"><img src="assets/arc-chimzy.jpeg" alt="Arc. Chimzi Kel-Owhonda" loading="lazy"/></div>
-        <div>
-          <h3 class="fo-name">Arc. Chimzi Kel-Owhonda</h3>
-          <p class="fo-role">Co-Founder · Principal Architect</p>
-          <p class="fo-body">A licensed architect bringing deep real estate experience to every CUBIX project. Arc. Chimzi ensures that your building investment is at its safest — from concept to completion.</p>
-          <div style="display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1rem;">
-            <button class="fo-contact" onclick="openWADirect('2347078396158','Arc. Chimzi Kel-Owhonda')">WhatsApp →</button>
-            <a class="fo-contact" href="tel:+2347078396158">Call →</a>
-          </div>
-        </div>
+      <div class="ba-grid">
+        <div class="ba-card"><div class="ba-label before-label">BEFORE</div><img src="assets/reno-mirror-before1.jpg" alt="Before renovation" loading="lazy"/></div>
+        <div class="ba-card"><div class="ba-label after-label">AFTER</div><img src="assets/reno-mirror-after1.jpg" alt="After renovation" loading="lazy"/></div>
+        <div class="ba-card"><div class="ba-label before-label">BEFORE</div><img src="assets/reno-mirror-before2.jpg" alt="Before step 2" loading="lazy"/></div>
+        <div class="ba-card"><div class="ba-label after-label">AFTER</div><img src="assets/reno-mirror-after2.jpg" alt="After step 2" loading="lazy"/></div>
       </div>
     </div>
-    <div class="fo-story">
-      <h3 class="fo-story-title rv">WHY WE<br/><em>STARTED CUBIX.</em></h3>
-      <p class="fo-story-body rv">Founded in 2024 by two licensed architects who saw a gap between what Nigerian clients deserved and what was being delivered. Armed with real qualifications, real estate experience, and an unwavering commitment to quality, Arc. Mohammed and Arc. Chimzi built CUBIX to treat every project as a personal statement of excellence. High-profile projects across Lagos, Abuja, and Port Harcourt. And this is only the beginning.</p>
+    <div class="ba-project rv">
+      <div style="margin-bottom:2rem;">
+        <span style="font-size:.58rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);background:rgba(240,192,48,0.1);border:1px solid rgba(240,192,48,0.2);padding:.3rem .8rem;">Interior Fit-Out</span>
+      </div>
+      <div class="ba-grid">
+        <div class="ba-card" style="grid-column:1/-1;"><div class="ba-label after-label">COMPLETED</div><img src="assets/proj-interior-salon.jpg" alt="Completed interior" loading="lazy" style="aspect-ratio:16/9;"/></div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:3rem;">
+      <button onclick="openWAContact()" style="background:var(--gold);color:var(--black);border:none;padding:1.1rem 3rem;font-family:var(--fb);font-size:.72rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;">BOOK YOUR RENOVATION →</button>
     </div>
   </div>
 </section>
 
-<section id="cta" class="sec" style="position:relative;overflow:hidden;min-height:80vh;display:flex;align-items:center;justify-content:center;background:#000;">
-  <div style="position:absolute;inset:0;z-index:0;">
-    <img src="assets/cta-bg.jpg" alt="CUBIX" style="width:100%;height:100%;object-fit:cover;opacity:.45;"/>
-  </div>
-  <div style="position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom,rgba(8,8,8,.4) 0%,rgba(8,8,8,.5) 50%,rgba(8,8,8,.85) 100%);"></div>
-  <div class="wrap" style="position:relative;z-index:2;text-align:center;padding-top:6rem;padding-bottom:10rem;">
-    <p class="ct-tag rv">Start Today — No Fees</p>
-    <h2 class="ct-title rv" style="font-size:clamp(3rem,7vw,8rem);">FREE<br/><em>CONSULTATION.</em></h2>
-    <p class="ct-sub rv">Speak directly with our licensed architects.<br/>No commitment. Just expert answers.</p>
+<!-- FINAL CTA -->
+<section id="cta" style="position:relative;overflow:hidden;min-height:80vh;display:flex;align-items:center;justify-content:center;background:#000;">
+  <div style="position:absolute;inset:0;z-index:0;"><img src="assets/cta-bg.jpg" alt="CUBIX" style="width:100%;height:100%;object-fit:cover;opacity:.45;"/></div>
+  <div style="position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom,rgba(8,8,8,.4),rgba(8,8,8,.85));"></div>
+  <div class="wrap" style="position:relative;z-index:2;text-align:center;padding-top:6rem;padding-bottom:8rem;">
+    <p class="ct-tag rv">Free — No Commitment</p>
+    <h2 class="ct-title rv">FREE<br/><em>CONSULTATION.</em></h2>
+    <p class="ct-sub rv">Speak directly with our licensed architects.<br/>Expert answers. Zero fees.</p>
     <div class="ct-btns rv">
-      <button class="ct-gold" onclick="openWAContact()" style="font-size:.75rem;padding:1.2rem 3rem;">
-        FREE CONSULTATION
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      <button class="ct-gold" onclick="openWAContact()">BOOK FREE CONSULTATION
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
       </button>
       <button class="ct-out" onclick="openBooking()">BOOK A CALL</button>
     </div>
@@ -668,7 +680,7 @@ img{max-width:100%;height:auto;}
           <li><a href="#services">Services</a></li>
           <li><a href="#realestate">Real Estate</a></li>
           <li><a href="#projects">Projects</a></li>
-          <li><a href="#founders">Our Story</a></li>
+          
           <li><a href="#cta">Contact</a></li>
         </ul>
       </div>
@@ -703,16 +715,49 @@ img{max-width:100%;height:auto;}
   </div>
 </footer>
 
-<!-- MOBILE STICKY BAR -->
 <div id="mob-bar" role="navigation" aria-label="Quick contact">
-  <button class="mob-bar-btn mb-wa" onclick="openWA()">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-    WHATSAPP US
+  <button class="mob-bar-btn mb-wa" onclick="openWAContact()">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    WHATSAPP
   </button>
   <button class="mob-bar-btn mb-bc" onclick="openBooking()">BOOK A CALL</button>
 </div>
 
-<!-- WHATSAPP INTENT CHOOSER -->
+<!-- ARCHITECT CONTACT PICKER -->
+<div id="arch-picker" role="dialog" style="position:fixed;inset:0;background:rgba(8,8,8,.92);z-index:3100;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s;padding:1.5rem;">
+  <div style="background:var(--charcoal);max-width:500px;width:100%;border:1px solid rgba(240,192,48,.15);position:relative;">
+    <button onclick="closeArchPicker()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--silver);cursor:pointer;font-size:1.1rem;width:32px;height:32px;">✕</button>
+    <div style="padding:2rem 2rem 1.2rem;border-bottom:1px solid var(--mid);">
+      <h2 style="font-family:var(--fd);font-size:1.7rem;font-weight:300;color:var(--white);margin-bottom:.4rem;">Who would you like to reach?</h2>
+      <p style="font-size:.78rem;color:var(--silver);">Choose an architect to chat or call directly on WhatsApp.</p>
+    </div>
+    <div style="padding:1.2rem 2rem 2rem;display:flex;flex-direction:column;gap:.9rem;">
+      <div style="border:1px solid var(--mid);padding:1.1rem;display:flex;align-items:center;gap:1rem;">
+        <img src="assets/arc-muhammed.jpeg" alt="Arc. Mohammed Sadiq" style="width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:top;flex-shrink:0;border:2px solid rgba(240,192,48,.25);"/>
+        <div style="flex:1;">
+          <p style="font-family:var(--fd);font-size:1.1rem;font-weight:300;color:var(--white);margin-bottom:.15rem;">Arc. Mohammed Sadiq</p>
+          <p style="font-size:.6rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2);margin-bottom:.5rem;">Co-Founder · Principal Architect</p>
+          <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+            <button onclick="archWAChat('2347066693803','Arc. Mohammed Sadiq')" style="font-size:.58rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;padding:.4rem .9rem;background:rgba(37,211,102,.12);border:1px solid rgba(37,211,102,.3);color:#25d166;cursor:pointer;">WhatsApp Chat</button>
+            <a href="tel:+2347066693803" style="font-size:.58rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;padding:.4rem .9rem;background:rgba(240,192,48,.1);border:1px solid rgba(240,192,48,.25);color:var(--gold);display:inline-flex;align-items:center;">Call</a>
+          </div>
+        </div>
+      </div>
+      <div style="border:1px solid var(--mid);padding:1.1rem;display:flex;align-items:center;gap:1rem;">
+        <img src="assets/arc-chimzy.jpeg" alt="Arc. Chimzi Kel-Owhonda" style="width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:top;flex-shrink:0;border:2px solid rgba(240,192,48,.25);"/>
+        <div style="flex:1;">
+          <p style="font-family:var(--fd);font-size:1.1rem;font-weight:300;color:var(--white);margin-bottom:.15rem;">Arc. Chimzi Kel-Owhonda</p>
+          <p style="font-size:.6rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2);margin-bottom:.5rem;">Co-Founder · Principal Architect</p>
+          <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+            <button onclick="archWAChat('2347078396158','Arc. Chimzi Kel-Owhonda')" style="font-size:.58rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;padding:.4rem .9rem;background:rgba(37,211,102,.12);border:1px solid rgba(37,211,102,.3);color:#25d166;cursor:pointer;">WhatsApp Chat</button>
+            <a href="tel:+2347078396158" style="font-size:.58rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;padding:.4rem .9rem;background:rgba(240,192,48,.1);border:1px solid rgba(240,192,48,.25);color:var(--gold);display:inline-flex;align-items:center;">Call</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="wa-chooser" role="dialog" aria-label="Contact via WhatsApp" aria-modal="true">
   <div class="wa-modal">
     <button class="wa-close" onclick="closeWA()" aria-label="Close">✕</button>
@@ -1012,8 +1057,36 @@ function setHeroFrame(raw) {
 }
 
 /* ============================================================
-   SEQ2 CANVAS
 ============================================================ */
+const s2Ctx    = s2Canvas.getContext('2d');
+const s2DPR    = Math.min(window.devicePixelRatio || 1, 2);
+let s2VW, s2VH;
+
+function s2Resize() {
+  s2VW = window.innerWidth; s2VH = window.innerHeight;
+  s2Canvas.width = s2VW * s2DPR; s2Canvas.height = s2VH * s2DPR;
+  s2Canvas.style.width = s2VW + 'px'; s2Canvas.style.height = s2VH + 'px';
+  s2Ctx.setTransform(1,0,0,1,0,0); s2Ctx.scale(s2DPR, s2DPR);
+}
+s2Resize();
+
+let s2Loaded = 0, s2Ready = false, s2CurIdx = 0, s2RAF = null;
+
+  if (!img || !img.complete || !img.naturalWidth) return;
+  s2Ctx.clearRect(0, 0, vw, vh);
+  const scale = Math.min(vw / img.naturalWidth, vh / img.naturalHeight);
+  const dw = img.naturalWidth * scale;
+  const dh = img.naturalHeight * scale;
+  const dx = (vw - dw) / 2;
+  const dy = (vh - dh) / 2;
+  s2Ctx.drawImage(img, dx, dy, dw, dh);
+}
+
+function setS2Frame(raw) {
+  if (idx === s2CurIdx && s2RAF) return;
+  s2CurIdx = idx;
+  if (s2RAF) cancelAnimationFrame(s2RAF);
+}
 
 /* ============================================================
    PRELOADER
@@ -1042,6 +1115,15 @@ function preloadHero() {
   }
 }
 
+    const img = new Image();
+    const idx = i - 1;
+    img.onload = img.onerror = function() {
+      if (this.naturalWidth) s2Frames[idx] = this;
+      s2Loaded++;
+    };
+  }
+}
+
 function onHeroReady() {
   hAllReady = true;
   drawHero(hFrames[0], hVW, hVH);
@@ -1049,7 +1131,6 @@ function onHeroReady() {
   setTimeout(() => {
     ldEl.classList.add('out');
     revealHeroText();
-    setTimeout(() => { initScroll();  }, 400);
   }, 700);
 }
 
@@ -1129,8 +1210,18 @@ function initScroll() {
     }
   });
 
-  /* SEQ2 PIN — 10x = 1000vh */
+  ScrollTrigger.create({
+    start:   'top top',
+    end:     '+=1000%',
+    scrub:   2,
+    pinSpacing: true,
+    anticipatePin: 1,
+    onUpdate(self) {
+      const p = self.progress;
+    }
+  });
 
+  initReveal();
   setTimeout(() => ScrollTrigger.refresh(), 600);
 }
 
@@ -1249,28 +1340,44 @@ let resizeT;
 window.addEventListener('resize', () => {
   clearTimeout(resizeT);
   resizeT = setTimeout(() => {
-    hResize(); 
+    hResize(); s2Resize();
     if (hFrames[hCurIdx]) drawHero(hFrames[hCurIdx], hVW, hVH);
-        if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+    if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
   }, 200);
 });
 
 /* ============================================================
    INIT
 ============================================================ */
-
-function openWAContact() {
-  var msg = encodeURIComponent("Hello Cubix, I'd like a FREE consultation. I came across your website and I'm interested in your services.");
-  window.open('https://wa.me/2347066693803?text=' + msg, '_blank', 'noopener');
-}
-function openWADirect(number, name) {
-  var msg = encodeURIComponent("Hello " + name + ", I found your profile on the CUBIX website and I'd like to discuss a project.");
-  window.open('https://wa.me/' + number + '?text=' + msg, '_blank', 'noopener');
-}
-
 buildWAChooser();
 loadLogoFrames();
 preloadHero();
+
+function openWAContact() {
+  openArchPicker();
+}
+function openArchPicker() {
+  var picker = document.getElementById('arch-picker');
+  if (picker) { picker.style.opacity='1'; picker.style.visibility='visible'; document.body.style.overflow='hidden'; if(lenis)lenis.stop(); }
+  else {
+    var msg = encodeURIComponent("Hello CUBIX, I'd like a FREE consultation. I came across your website and I'm interested in your services.");
+    window.open('https://wa.me/2347066693803?text='+msg,'_blank','noopener');
+  }
+}
+function closeArchPicker() {
+  var picker = document.getElementById('arch-picker');
+  if (picker) { picker.style.opacity='0'; picker.style.visibility='hidden'; document.body.style.overflow=''; if(lenis)lenis.start(); }
+}
+function archWAChat(number, name) {
+  var msg = encodeURIComponent("Hello "+name+", I found your profile on the CUBIX website and I'd like a free consultation.");
+  closeArchPicker();
+  window.open('https://wa.me/'+number+'?text='+msg,'_blank','noopener');
+}
+function openWADirect(number, name) {
+  var msg = encodeURIComponent("Hello "+name+", I found your profile on the CUBIX website and I'd like to discuss a project.");
+  window.open('https://wa.me/'+number+'?text='+msg,'_blank','noopener');
+}
+
 </script>
 </body>
 </html>
