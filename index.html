@@ -790,6 +790,8 @@ const WA_CHIMZY   = '2347078396158'; // Arc. Chimzy
 
 const FRAME_COUNT = 300;
 const FRAME_PATH  = 'sequence1/ezgif-frame-';
+const MIN_HERO_FRAMES_TO_START = Math.min(30, FRAME_COUNT);
+const PRELOAD_FAILSAFE_MS = 8000;
 
 const LOGO_FRAMES = 64;
 const LOGO_PATH   = 'loading/frame_';
@@ -990,6 +992,7 @@ let   hLoaded   = 0;
 let   hAllReady = false;
 let   hCurIdx   = 0;
 let   hRAF      = null;
+let   hStarted  = false;
 
 function drawHero(img, vw, vh) {
   if (!img || !img.complete || !img.naturalWidth) return;
@@ -1036,15 +1039,23 @@ function preloadHero() {
       if (this.naturalWidth) hFrames[idx] = this;
       hLoaded++;
       updateProgress(hLoaded);
-      if(hLoaded===30)onHeroReady();
+      if (hLoaded >= MIN_HERO_FRAMES_TO_START) onHeroReady();
+      if (hLoaded === FRAME_COUNT) hAllReady = true;
     };
     img.src = FRAME_PATH + pad3(i) + '.jpg';
   }
+
+  setTimeout(() => {
+    if (!hStarted) onHeroReady();
+  }, PRELOAD_FAILSAFE_MS);
 }
 
 function onHeroReady() {
+  if (hStarted) return;
+  hStarted = true;
   hAllReady = true;
-  drawHero(hFrames[0], hVW, hVH);
+  const firstReadyFrame = hFrames.find(Boolean);
+  if (firstReadyFrame) drawHero(firstReadyFrame, hVW, hVH);
   cancelAnimationFrame(logoRAF);
   setTimeout(() => {
     ldEl.classList.add('out');
