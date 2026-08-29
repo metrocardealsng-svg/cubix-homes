@@ -44,7 +44,8 @@ button{border:none;background:none;cursor:pointer;font-family:inherit;color:inhe
 /* ── LOADING SCREEN ── */
 #loading{
   position:fixed;inset:0;background:#060606;z-index:9999;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  display:none;flex-direction:column;align-items:center;justify-content:center;
+  opacity:0;visibility:hidden;pointer-events:none;
   transition:opacity 1.2s var(--ease),visibility 1.2s;
   animation:forceHideLoading 0s linear 14s forwards;
 }
@@ -505,7 +506,7 @@ img{max-width:100%;height:auto;}
       <p class="rv" style="max-width:240px;font-size:.8rem;font-weight:300;color:var(--silver);line-height:1.8">A selection of completed and ongoing projects across Nigeria.</p>
     </div>
     <div class="pj-grid">
-      <div class="pj-card rv"><img src="https://github.com/user-attachments/assets/5b8a4706-308b-4884-9417-2a1535efd35f" alt="CUBIX project exterior view" loading="lazy"/><div class="pj-tag">Actual Work</div><div class="pj-info"><p class="pj-cat">Architecture · Exterior</p><h3 class="pj-name">Cubix Project — Exterior View</h3><p class="pj-loc">Nigeria</p><button class="pj-enquire" onclick="openWAProject('Cubix Project Exterior View')">Enquire →</button></div></div>
+      <div class="pj-card rv"><img src="https://github.com/user-attachments/assets/6ea4b296-6009-4be5-aaa1-8872cf04532b" alt="CUBIX project exterior view" loading="lazy"/><div class="pj-tag">Actual Work</div><div class="pj-info"><p class="pj-cat">Architecture · Exterior</p><h3 class="pj-name">Cubix Project — Exterior View</h3><p class="pj-loc">Nigeria</p><button class="pj-enquire" onclick="openWAProject('Cubix Project Exterior View')">Enquire →</button></div></div>
       <div class="pj-card rv"><img src="assets/project1.jpeg" alt="CUBIX luxury villa, Abuja" loading="lazy"/><div class="pj-tag">Residential</div><div class="pj-info"><p class="pj-cat">Residential · Architecture</p><h3 class="pj-name">Luxury Villa — Abuja</h3><p class="pj-loc">FCT, Nigeria</p><button class="pj-enquire" onclick="openWAProject('Luxury Villa Abuja')">Enquire →</button></div></div>
       <div class="pj-card rv"><img src="assets/project2.jpeg" alt="CUBIX premium duplex, Lagos" loading="lazy"/><div class="pj-tag">Architecture</div><div class="pj-info"><p class="pj-cat">Architecture · Visualization</p><h3 class="pj-name">Premium Duplex — Lagos</h3><p class="pj-loc">Lekki, Lagos</p><button class="pj-enquire" onclick="openWAProject('Premium Duplex Lagos')">Enquire →</button></div></div>
       <div class="pj-card rv"><img src="assets/project6.jpeg" alt="CUBIX semi-detached duplex" loading="lazy"/><div class="pj-tag">Completed</div><div class="pj-info"><p class="pj-cat">Construction · Residential</p><h3 class="pj-name">Semi-Detached Duplex</h3><p class="pj-loc">Lagos, Nigeria</p><button class="pj-enquire" onclick="openWAProject('Semi-Detached Duplex Lagos')">Enquire →</button></div></div>
