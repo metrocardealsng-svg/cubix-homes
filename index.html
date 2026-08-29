@@ -1070,7 +1070,7 @@ function s2Resize() {
 }
 s2Resize();
 
-let s2Loaded = 0, s2Ready = false, s2CurIdx = 0, s2RAF = null;
+
 
   if (!img || !img.complete || !img.naturalWidth) return;
   s2Ctx.clearRect(0, 0, vw, vh);
@@ -1082,11 +1082,7 @@ let s2Loaded = 0, s2Ready = false, s2CurIdx = 0, s2RAF = null;
   s2Ctx.drawImage(img, dx, dy, dw, dh);
 }
 
-function setS2Frame(raw) {
-  if (idx === s2CurIdx && s2RAF) return;
-  s2CurIdx = idx;
-  if (s2RAF) cancelAnimationFrame(s2RAF);
-}
+
 
 /* ============================================================
    PRELOADER
@@ -1119,10 +1115,7 @@ function preloadHero() {
     const idx = i - 1;
     img.onload = img.onerror = function() {
       if (this.naturalWidth) s2Frames[idx] = this;
-      s2Loaded++;
-    };
-  }
-}
+
 
 function onHeroReady() {
   hAllReady = true;
