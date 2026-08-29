@@ -47,7 +47,7 @@ button{border:none;background:none;cursor:pointer;font-family:inherit;color:inhe
   display:none;flex-direction:column;align-items:center;justify-content:center;
   opacity:0;visibility:hidden;pointer-events:none;
   transition:opacity 1.2s var(--ease),visibility 1.2s;
-  animation:forceHideLoading 0s linear 14s forwards;
+  animation:forceHideLoading 0s linear 4s forwards;
 }
 #loading.out{opacity:0;visibility:hidden;pointer-events:none}
 /* FIX: logo canvas uses object-fit:cover inside a circle clip */
@@ -506,7 +506,7 @@ img{max-width:100%;height:auto;}
       <p class="rv" style="max-width:240px;font-size:.8rem;font-weight:300;color:var(--silver);line-height:1.8">A selection of completed and ongoing projects across Nigeria.</p>
     </div>
     <div class="pj-grid">
-      <div class="pj-card rv"><img src="https://github.com/user-attachments/assets/cd4ae270-e9fc-4b5a-a9ea-9bb039ca6b9e" alt="CUBIX project exterior view" loading="lazy"/><div class="pj-tag">Actual Work</div><div class="pj-info"><p class="pj-cat">Architecture · Exterior</p><h3 class="pj-name">Cubix Project — Exterior View</h3><p class="pj-loc">Nigeria</p><button class="pj-enquire" onclick="openWAProject('Cubix Project Exterior View')">Enquire →</button></div></div>
+      <div class="pj-card rv"><img src="https://github.com/user-attachments/assets/e66e58be-3bea-49a5-ac9d-0bd0ce1c8410" alt="CUBIX project exterior view" loading="lazy"/><div class="pj-tag">Actual Work</div><div class="pj-info"><p class="pj-cat">Architecture · Exterior</p><h3 class="pj-name">Cubix Project — Exterior View</h3><p class="pj-loc">Nigeria</p><button class="pj-enquire" onclick="openWAProject('Cubix Project Exterior View')">Enquire →</button></div></div>
       <div class="pj-card rv"><img src="assets/project1.jpeg" alt="CUBIX luxury villa, Abuja" loading="lazy"/><div class="pj-tag">Residential</div><div class="pj-info"><p class="pj-cat">Residential · Architecture</p><h3 class="pj-name">Luxury Villa — Abuja</h3><p class="pj-loc">FCT, Nigeria</p><button class="pj-enquire" onclick="openWAProject('Luxury Villa Abuja')">Enquire →</button></div></div>
       <div class="pj-card rv"><img src="assets/project2.jpeg" alt="CUBIX premium duplex, Lagos" loading="lazy"/><div class="pj-tag">Architecture</div><div class="pj-info"><p class="pj-cat">Architecture · Visualization</p><h3 class="pj-name">Premium Duplex — Lagos</h3><p class="pj-loc">Lekki, Lagos</p><button class="pj-enquire" onclick="openWAProject('Premium Duplex Lagos')">Enquire →</button></div></div>
       <div class="pj-card rv"><img src="assets/project6.jpeg" alt="CUBIX semi-detached duplex" loading="lazy"/><div class="pj-tag">Completed</div><div class="pj-info"><p class="pj-cat">Construction · Residential</p><h3 class="pj-name">Semi-Detached Duplex</h3><p class="pj-loc">Lagos, Nigeria</p><button class="pj-enquire" onclick="openWAProject('Semi-Detached Duplex Lagos')">Enquire →</button></div></div>
@@ -721,8 +721,8 @@ img{max-width:100%;height:auto;}
     el.classList.add('out');
     el.style.display = 'none';
   }
-  window.addEventListener('DOMContentLoaded', () => setTimeout(hardHideLoader, 3500), { once: true });
-  window.addEventListener('load', () => setTimeout(hardHideLoader, 1000), { once: true });
+  window.addEventListener('DOMContentLoaded', () => setTimeout(hardHideLoader, 1200), { once: true });
+  window.addEventListener('load', () => setTimeout(hardHideLoader, 400), { once: true });
   window.addEventListener('error', hardHideLoader, { once: true });
   window.addEventListener('unhandledrejection', hardHideLoader, { once: true });
   window.__hardHideLoader = hardHideLoader;
@@ -736,7 +736,7 @@ const WA_PRIMARY  = '2347066693803';
 const FRAME_COUNT = 300;
 const FRAME_PATH  = 'sequence1/ezgif-frame-';
 const MIN_HERO_FRAMES_TO_START = Math.min(30, FRAME_COUNT);
-const PRELOAD_FAILSAFE_MS = 8000;
+const PRELOAD_FAILSAFE_MS = 2500;
 
 const LOGO_FRAMES = 64;
 const LOGO_PATH   = 'loading/frame_';
