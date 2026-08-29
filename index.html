@@ -505,7 +505,7 @@ img{max-width:100%;height:auto;}
       <p class="rv" style="max-width:240px;font-size:.8rem;font-weight:300;color:var(--silver);line-height:1.8">A selection of completed and ongoing projects across Nigeria.</p>
     </div>
     <div class="pj-grid">
-      <div class="pj-card rv"><img src="https://github.com/user-attachments/assets/dbc298ae-b561-4414-936d-d55f2d48138e" alt="CUBIX project exterior view" loading="lazy"/><div class="pj-tag">Actual Work</div><div class="pj-info"><p class="pj-cat">Architecture · Exterior</p><h3 class="pj-name">Cubix Project — Exterior View</h3><p class="pj-loc">Nigeria</p><button class="pj-enquire" onclick="openWAProject('Cubix Project Exterior View')">Enquire →</button></div></div>
+      <div class="pj-card rv"><img src="https://github.com/user-attachments/assets/5b8a4706-308b-4884-9417-2a1535efd35f" alt="CUBIX project exterior view" loading="lazy"/><div class="pj-tag">Actual Work</div><div class="pj-info"><p class="pj-cat">Architecture · Exterior</p><h3 class="pj-name">Cubix Project — Exterior View</h3><p class="pj-loc">Nigeria</p><button class="pj-enquire" onclick="openWAProject('Cubix Project Exterior View')">Enquire →</button></div></div>
       <div class="pj-card rv"><img src="assets/project1.jpeg" alt="CUBIX luxury villa, Abuja" loading="lazy"/><div class="pj-tag">Residential</div><div class="pj-info"><p class="pj-cat">Residential · Architecture</p><h3 class="pj-name">Luxury Villa — Abuja</h3><p class="pj-loc">FCT, Nigeria</p><button class="pj-enquire" onclick="openWAProject('Luxury Villa Abuja')">Enquire →</button></div></div>
       <div class="pj-card rv"><img src="assets/project2.jpeg" alt="CUBIX premium duplex, Lagos" loading="lazy"/><div class="pj-tag">Architecture</div><div class="pj-info"><p class="pj-cat">Architecture · Visualization</p><h3 class="pj-name">Premium Duplex — Lagos</h3><p class="pj-loc">Lekki, Lagos</p><button class="pj-enquire" onclick="openWAProject('Premium Duplex Lagos')">Enquire →</button></div></div>
       <div class="pj-card rv"><img src="assets/project6.jpeg" alt="CUBIX semi-detached duplex" loading="lazy"/><div class="pj-tag">Completed</div><div class="pj-info"><p class="pj-cat">Construction · Residential</p><h3 class="pj-name">Semi-Detached Duplex</h3><p class="pj-loc">Lagos, Nigeria</p><button class="pj-enquire" onclick="openWAProject('Semi-Detached Duplex Lagos')">Enquire →</button></div></div>
@@ -713,6 +713,20 @@ img{max-width:100%;height:auto;}
 </div>
 
 <script>
+(() => {
+  function hardHideLoader() {
+    const el = document.getElementById('loading');
+    if (!el) return;
+    el.classList.add('out');
+    el.style.display = 'none';
+  }
+  window.addEventListener('DOMContentLoaded', () => setTimeout(hardHideLoader, 3500), { once: true });
+  window.addEventListener('load', () => setTimeout(hardHideLoader, 1000), { once: true });
+  window.addEventListener('error', hardHideLoader, { once: true });
+  window.addEventListener('unhandledrejection', hardHideLoader, { once: true });
+  window.__hardHideLoader = hardHideLoader;
+})();
+
 /* ============================================================
    CONFIG
 ============================================================ */
@@ -930,10 +944,15 @@ const ldFill = document.getElementById('ld-fill');
 const ldPct  = document.getElementById('ld-pct');
 const ldEl   = document.getElementById('loading');
 const forceHideLoading = () => {
-  if (ldEl) ldEl.classList.add('out');
+  if (window.__hardHideLoader) return window.__hardHideLoader();
+  if (ldEl) {
+    ldEl.classList.add('out');
+    ldEl.style.display = 'none';
+  }
 };
 
 function updateProgress(n) {
+  if (!ldFill || !ldPct) return;
   const p = Math.round((n / FRAME_COUNT) * 100);
   ldFill.style.width = p + '%';
   ldPct.textContent  = p + '%';
@@ -966,9 +985,9 @@ function onHeroReady() {
   if (firstReadyFrame) drawHero(firstReadyFrame, hVW, hVH);
   cancelAnimationFrame(logoRAF);
   setTimeout(() => {
-    ldEl.classList.add('out');
-    revealHeroText();
-    setTimeout(() => { initScroll();  }, 400);
+    forceHideLoading();
+    try { revealHeroText(); } catch (_) {}
+    try { setTimeout(() => { initScroll();  }, 400); } catch (_) {}
   }, 700);
 }
 
