@@ -503,6 +503,7 @@ img{max-width:100%;height:auto;}
       <p class="rv" style="max-width:240px;font-size:.8rem;font-weight:300;color:var(--silver);line-height:1.8">A selection of completed and ongoing projects across Nigeria.</p>
     </div>
     <div class="pj-grid">
+      <div class="pj-card rv"><img src="https://github.com/user-attachments/assets/fa481c8a-3694-40b2-9d49-3c2a617bd82d" alt="CUBIX project exterior view" loading="lazy"/><div class="pj-tag">Actual Work</div><div class="pj-info"><p class="pj-cat">Architecture · Exterior</p><h3 class="pj-name">Cubix Project — Exterior View</h3><p class="pj-loc">Nigeria</p><button class="pj-enquire" onclick="openWAProject('Cubix Project Exterior View')">Enquire →</button></div></div>
       <div class="pj-card rv"><img src="assets/project1.jpeg" alt="CUBIX luxury villa, Abuja" loading="lazy"/><div class="pj-tag">Residential</div><div class="pj-info"><p class="pj-cat">Residential · Architecture</p><h3 class="pj-name">Luxury Villa — Abuja</h3><p class="pj-loc">FCT, Nigeria</p><button class="pj-enquire" onclick="openWAProject('Luxury Villa Abuja')">Enquire →</button></div></div>
       <div class="pj-card rv"><img src="assets/project2.jpeg" alt="CUBIX premium duplex, Lagos" loading="lazy"/><div class="pj-tag">Architecture</div><div class="pj-info"><p class="pj-cat">Architecture · Visualization</p><h3 class="pj-name">Premium Duplex — Lagos</h3><p class="pj-loc">Lekki, Lagos</p><button class="pj-enquire" onclick="openWAProject('Premium Duplex Lagos')">Enquire →</button></div></div>
       <div class="pj-card rv"><img src="assets/project6.jpeg" alt="CUBIX semi-detached duplex" loading="lazy"/><div class="pj-tag">Completed</div><div class="pj-info"><p class="pj-cat">Construction · Residential</p><h3 class="pj-name">Semi-Detached Duplex</h3><p class="pj-loc">Lagos, Nigeria</p><button class="pj-enquire" onclick="openWAProject('Semi-Detached Duplex Lagos')">Enquire →</button></div></div>
@@ -926,6 +927,9 @@ function setHeroFrame(raw) {
 const ldFill = document.getElementById('ld-fill');
 const ldPct  = document.getElementById('ld-pct');
 const ldEl   = document.getElementById('loading');
+const forceHideLoading = () => {
+  if (ldEl) ldEl.classList.add('out');
+};
 
 function updateProgress(n) {
   const p = Math.round((n / FRAME_COUNT) * 100);
@@ -965,6 +969,10 @@ function onHeroReady() {
     setTimeout(() => { initScroll();  }, 400);
   }, 700);
 }
+
+window.addEventListener('error', forceHideLoading, { once: true });
+window.addEventListener('unhandledrejection', forceHideLoading, { once: true });
+setTimeout(forceHideLoading, PRELOAD_FAILSAFE_MS + 2000);
 
 function revealHeroText() {
   const tl = gsap.timeline();
