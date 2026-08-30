@@ -404,7 +404,7 @@ img{max-width:100%;height:auto;}
 <body>
 
 <!-- LOADING SCREEN -->
-<div id="loading">
+<div id="loading" style="transition:opacity .3s;">
   <div class="ld-logo-ring">
     <canvas id="ld-canvas" width="400" height="400"></canvas>
   </div>
@@ -1002,15 +1002,17 @@ function animateLogo() {
 }
 
 function loadLogoFrames() {
+  // Load logo frames silently — non-blocking
   for (let i = 1; i <= LOGO_FRAMES; i++) {
     const img = new Image();
     const idx = i - 1;
-    img.onload = img.onerror = function() {
-      logoFrames[idx] = this.naturalWidth ? this : null;
+    img.onload = function() {
+      logoFrames[idx] = this;
       logoLoaded++;
       if (logoLoaded === 1) animateLogo();
     };
-    img.src = LOGO_PATH + pad(i) + '.jpg';
+    img.onerror = function() { logoLoaded++; };
+    img.src = LOGO_PATH + String(i).padStart(3,'0') + '.jpg';
   }
 }
 
@@ -1098,16 +1100,18 @@ function updateProgress(n) {
 }
 
 function preloadHero() {
+  // Show site immediately — don't wait for frames
+  setTimeout(onHeroReady, 100);
+  // Load frames silently in background
   for (let i = 1; i <= FRAME_COUNT; i++) {
     const img = new Image();
     const idx = i - 1;
-    img.onload = img.onerror = function() {
-      if (this.naturalWidth) hFrames[idx] = this;
+    img.onload = function() {
+      hFrames[idx] = this;
       hLoaded++;
-      updateProgress(hLoaded);
-      if(hLoaded===30)onHeroReady();
     };
-    img.src = FRAME_PATH + pad3(i) + '.jpg';
+    img.onerror = function() { hLoaded++; };
+    img.src = FRAME_PATH + String(i).padStart(3,'0') + '.jpg';
   }
 }
 
@@ -1119,12 +1123,15 @@ function preloadHero() {
 
 function onHeroReady() {
   hAllReady = true;
-  drawHero(hFrames[0], hVW, hVH);
-  cancelAnimationFrame(logoRAF);
-  setTimeout(() => {
-    ldEl.classList.add('out');
-    revealHeroText();
-  }, 700);
+  // Draw first available frame or leave canvas black
+  if (hFrames[0]) drawHero(hFrames[0], hVW, hVH);
+  // Cancel logo animation
+  if (logoRAF) cancelAnimationFrame(logoRAF);
+  // Hide loading screen instantly
+  const ldEl = document.getElementById('loading');
+  if (ldEl) { ldEl.style.opacity='0'; ldEl.style.visibility='hidden'; }
+  revealHeroText();
+  setTimeout(() => { initScroll(); }, 400);
 }
 
 function revealHeroText() {
