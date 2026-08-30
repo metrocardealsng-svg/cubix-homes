@@ -42,11 +42,7 @@ a{color:inherit;text-decoration:none}
 button{border:none;background:none;cursor:pointer;font-family:inherit;color:inherit}
 
 /* ── LOADING SCREEN ── */
-#loading{
-  position:fixed;inset:0;background:#060606;z-index:9999;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  transition:opacity 1.2s var(--ease),visibility 1.2s;
-}
+#loading{display:none!important;}
 #loading.out{opacity:0;visibility:hidden;pointer-events:none}
 /* FIX: logo canvas uses object-fit:cover inside a circle clip */
 .ld-logo-ring{
@@ -404,7 +400,7 @@ img{max-width:100%;height:auto;}
 <body>
 
 <!-- LOADING SCREEN -->
-<div id="loading" style="transition:opacity .3s;">
+<div id="loading" style="display:none!important;">
   <div class="ld-logo-ring">
     <canvas id="ld-canvas" width="400" height="400"></canvas>
   </div>
@@ -1350,8 +1346,15 @@ window.addEventListener('resize', () => {
    INIT
 ============================================================ */
 buildWAChooser();
-loadLogoFrames();
-preloadHero();
+// Start site immediately — no loading gate
+document.addEventListener('DOMContentLoaded', function() {
+  hResize();
+  revealHeroText();
+  setTimeout(initScroll, 300);
+  // Load frames silently in background
+  preloadHero();
+  loadLogoFrames();
+});
 
 function openWAContact() {
   openArchPicker();
