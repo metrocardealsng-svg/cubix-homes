@@ -97,7 +97,7 @@ button{border:none;background:none;cursor:pointer;font-family:inherit;color:inhe
 
 /* ── HERO ── */
 #hero{position:relative;width:100%}
-.h-pin{position:sticky;top:0;width:100%;height:100vh;overflow:hidden;background:var(--black)}
+.h-pin{position:sticky;top:0;width:100%;height:100vh;overflow:hidden;background:var(--black);isolation:isolate;}
 #h-canvas{position:absolute;inset:0;width:100%;height:100%;background:#000;image-rendering:high-quality;}
 .h-vignette{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse 80% 80% at 50% 50%,transparent 25%,rgba(8,8,8,.6) 100%),linear-gradient(to bottom,rgba(8,8,8,.75) 0%,rgba(8,8,8,.0) 20%,rgba(8,8,8,.0) 55%,rgba(8,8,8,.8) 85%,rgba(8,8,8,.97) 100%);}
 .h-copy{position:absolute;bottom:10vh;left:5vw;z-index:2;max-width:700px;}
@@ -113,7 +113,7 @@ button{border:none;background:none;cursor:pointer;font-family:inherit;color:inhe
 .h-scroll-ind span{font-size:.55rem;letter-spacing:.28em;text-transform:uppercase;color:var(--silver);writing-mode:vertical-lr}
 .h-scroll-line{width:1px;height:44px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollP 2s ease-in-out infinite}
 @keyframes scrollP{0%,100%{opacity:.5;transform:scaleY(1)}50%{opacity:1;transform:scaleY(.55)}}
-#h-phase{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;opacity:0;background:rgba(8,8,8,0);}
+#h-phase{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;opacity:0;background:rgba(8,8,8,0);overflow:hidden;}
 .hp-text1{font-family:var(--fd);font-size:clamp(2.5rem,6vw,6.5rem);font-weight:300;font-style:italic;color:#fff;text-align:center;line-height:1.05;letter-spacing:.02em;}
 .hp-line{width:50px;height:1px;background:var(--gold);margin:1.6rem auto}
 .hp-text2{font-size:clamp(.55rem,.85vw,.7rem);font-weight:600;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);text-align:center;}
@@ -415,11 +415,10 @@ button{border:none;background:none;cursor:pointer;font-family:inherit;color:inhe
 <!-- Mobile Menu -->
 <div id="mob-menu" role="dialog" aria-label="Navigation">
   <ul class="mob-links" role="list">
-    <li><a href="#about" class="ml">About</a></li>
+    <li><a href="#about" class="ml">About Cubix</a></li>
     <li><a href="#services" class="ml">Services</a></li>
     <li><a href="#realestate" class="ml">Real Estate</a></li>
     <li><a href="#projects" class="ml">Projects</a></li>
-    <li><a href="#founders" class="ml">Our Story</a></li>
     <li><a href="#cta" class="ml">Contact</a></li>
   </ul>
   <div class="mob-ctas">
@@ -429,6 +428,7 @@ button{border:none;background:none;cursor:pointer;font-family:inherit;color:inhe
   <p class="mob-info">cubixhomesltd@gmail.com<br/>+234 706 669 3803</p>
 </div>
 
+<!-- HERO — 300-FRAME SEQUENCE -->
 <!-- HERO — 300-FRAME SEQUENCE -->
 <section id="hero" aria-label="CUBIX construction sequence">
   <div class="h-pin">
@@ -459,7 +459,92 @@ button{border:none;background:none;cursor:pointer;font-family:inherit;color:inhe
   </div>
 </section>
 
+<!-- ABOUT CUBIX — unified section -->
+<section id="about" class="sec" style="background:var(--cream);color:var(--black);padding:9rem 0 8rem">
+  <div class="wrap">
+    <p class="s-label rv" style="color:var(--black)"><span style="background:var(--black)"></span>About Cubix</p>
 
+    <!-- Founders -->
+    <h2 class="fo-intro rv">THE PEOPLE<br/><em>BEHIND CUBIX.</em></h2>
+    <div class="fo-grid" style="margin-bottom:6rem">
+      <div class="fo-card rv">
+        <div class="fo-img-wrap rvc"><img src="assets/arc-muhammed.jpeg" alt="Arc. Mohammed Sadiq" loading="lazy"/></div>
+        <div>
+          <h3 class="fo-name">Arc. Mohammed Sadiq</h3>
+          <p class="fo-role">Co-Founder · Principal Architect</p>
+          <p class="fo-body">A licensed architect with a proven track record in high-level, precise architectural design and construction. Arc. Mohammed co-founded CUBIX to bring a new standard of quality and professionalism to the Nigerian construction landscape.</p>
+          <div class="fo-socials">
+            <button class="fo-contact" onclick="openWADirect('2347066693803','Arc. Mohammed Sadiq')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+              WhatsApp
+            </button>
+            <a class="fo-contact" href="https://www.instagram.com/cubix_ng" target="_blank" rel="noopener">Instagram</a>
+          </div>
+        </div>
+      </div>
+      <div class="fo-card rv">
+        <div class="fo-img-wrap rvc"><img src="assets/arc-chimzy.jpeg" alt="Arc. Chimzi Kel-Owhonda" loading="lazy"/></div>
+        <div>
+          <h3 class="fo-name">Arc. Chimzi Kel-Owhonda</h3>
+          <p class="fo-role">Co-Founder · Principal Architect</p>
+          <p class="fo-body">A licensed architect bringing deep real estate experience and building professionalism to every CUBIX project. Arc. Chimzi ensures that your building investment is at its safest — from concept to completion.</p>
+          <div class="fo-socials">
+            <button class="fo-contact" onclick="openWADirect('2347078396158','Arc. Chimzi Kel-Owhonda')">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+              WhatsApp
+            </button>
+            <a class="fo-contact" href="https://www.instagram.com/cubix_ng" target="_blank" rel="noopener">Instagram</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- About body -->
+    <div class="ab-grid">
+      <div>
+        <h2 class="ab-title rv">BUILT WITH<br/><em>PURPOSE.</em></h2>
+        <p class="ab-body rv">CUBIX Homes and Investment Limited is a construction and real estate company founded by two licensed architects with a knack for high-level, precise design, construction, and real estate.</p>
+        <p class="ab-body rv">Over a short period, CUBIX has handled high-profile construction projects across Lagos, Abuja and Port Harcourt — proving that quality and speed are not mutually exclusive.</p>
+        <blockquote class="ab-quote rv">"With a wealth of Real Estate experience and Building Professionalism by the licensed architects in charge, your building investment is at its safest under our belt."</blockquote>
+        <p class="ab-body rv">Founded in July 2024, we set out to build a company that treats every project as a personal statement of excellence. Today, CUBIX has delivered high-profile projects across Nigeria — and this is only the beginning.</p>
+        <div class="ab-stats">
+          <div class="rv"><p class="stn">50<span>+</span></p><p class="stl">Projects Delivered</p></div>
+          <div class="rv"><p class="stn">3<span>+</span></p><p class="stl">States Active</p></div>
+          <div class="rv"><p class="stn">2024</p><p class="stl">Year Founded</p></div>
+          <div class="rv"><p class="stn">100<span>%</span></p><p class="stl">Licensed Architects</p></div>
+        </div>
+      </div>
+      <div class="ab-imgs">
+        <div class="ab-img rvc"><img src="assets/real12.jpg" alt="CUBIX completed residential project" loading="lazy"/></div>
+        <div class="ab-img rvc"><img src="assets/proj-living-room.jpg" alt="CUBIX interior finish" loading="lazy"/></div>
+        <div class="ab-img rvc"><img src="assets/real7.jpg" alt="CUBIX construction in progress" loading="lazy"/></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="sec">
+  <div class="wrap">
+    <div class="pj-head">
+      <div>
+        <p class="s-label rv">Portfolio</p>
+        <h2 class="pj-title rv">OUR<br/><em>WORK.</em></h2>
+      </div>
+      <p class="rv" style="max-width:240px;font-size:.8rem;font-weight:300;color:var(--silver);line-height:1.8">A selection of completed and ongoing projects across Nigeria.</p>
+    </div>
+    <div class="pj-grid">
+      <div class="pj-card rv"><img src="assets/proj-momo-final.jpg" alt="CUBIX commercial building completed" loading="lazy"/><div class="pj-tag">Completed</div><div class="pj-info"><p class="pj-cat">Commercial · Architecture</p><h3 class="pj-name">MOMO Commercial Building</h3><p class="pj-loc">Nigeria</p><button class="pj-enquire" onclick="openWAProject('MOMO Commercial Building')">Enquire →</button></div></div>
+      <div class="pj-card rv"><img src="assets/proj-hilltop-hotel.jpg" alt="CUBIX Hilltop Hotel redevelopment" loading="lazy"/><div class="pj-tag">Completed</div><div class="pj-info"><p class="pj-cat">Hospitality · Redevelopment</p><h3 class="pj-name">Hilltop Hotel Redevelopment</h3><p class="pj-loc">Nigeria</p><button class="pj-enquire" onclick="openWAProject('Hilltop Hotel Redevelopment')">Enquire →</button></div></div>
+      <div class="pj-card rv"><img src="assets/proj-hilltop-final.jpg" alt="CUBIX Hilltop project final" loading="lazy"/><div class="pj-tag">Completed</div><div class="pj-info"><p class="pj-cat">Construction · Finishing</p><h3 class="pj-name">Hilltop Final Project</h3><p class="pj-loc">Nigeria</p><button class="pj-enquire" onclick="openWAProject('Hilltop Final Project')">Enquire →</button></div></div>
+      <div class="pj-card rv"><img src="assets/proj-lounge-render.jpg" alt="CUBIX Urban Lounge design" loading="lazy"/><div class="pj-tag">Design</div><div class="pj-info"><p class="pj-cat">Interior · Commercial Design</p><h3 class="pj-name">Urban Lounge Concept</h3><p class="pj-loc">Nigeria</p><button class="pj-enquire" onclick="openWAProject('Urban Lounge Design')">Enquire →</button></div></div>
+      <div class="pj-card rv"><img src="assets/proj-living-room.jpg" alt="CUBIX luxury interior" loading="lazy"/><div class="pj-tag">Interior</div><div class="pj-info"><p class="pj-cat">Interior Design · Luxury</p><h3 class="pj-name">Luxury Living Room Finish</h3><p class="pj-loc">Nigeria</p><button class="pj-enquire" onclick="openWAProject('Luxury Interior Design')">Enquire →</button></div></div>
+      <div class="pj-card rv"><img src="assets/proj-momo-render1.jpg" alt="CUBIX MOMO render" loading="lazy"/><div class="pj-tag">Design</div><div class="pj-info"><p class="pj-cat">Architecture · 3D Visualization</p><h3 class="pj-name">MOMO Building — 3D Render</h3><p class="pj-loc">Nigeria</p><button class="pj-enquire" onclick="openWAProject('MOMO Building Render')">Enquire →</button></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BEFORE & AFTER -->
 <!-- BEFORE & AFTER -->
 <section id="renovations" style="background:var(--black);padding:9rem 0;">
   <div class="wrap">
@@ -526,70 +611,6 @@ button{border:none;background:none;cursor:pointer;font-family:inherit;color:inhe
 .after-label{background:var(--gold);color:var(--black);}
 @media(max-width:600px){.ba-grid{grid-template-columns:1fr;}}
 </style>
-
-<!-- ABOUT CUBIX — unified section -->
-<section id="about" class="sec" style="background:var(--cream);color:var(--black);padding:9rem 0 8rem">
-  <div class="wrap">
-    <p class="s-label rv" style="color:var(--black)"><span style="background:var(--black)"></span>About Cubix</p>
-
-    <!-- Founders -->
-    <h2 class="fo-intro rv">THE PEOPLE<br/><em>BEHIND CUBIX.</em></h2>
-    <div class="fo-grid" style="margin-bottom:6rem">
-      <div class="fo-card rv">
-        <div class="fo-img-wrap rvc"><img src="assets/arc-muhammed.jpeg" alt="Arc. Mohammed Sadiq" loading="lazy"/></div>
-        <div>
-          <h3 class="fo-name">Arc. Mohammed Sadiq</h3>
-          <p class="fo-role">Co-Founder · Principal Architect</p>
-          <p class="fo-body">A licensed architect with a proven track record in high-level, precise architectural design and construction. Arc. Mohammed co-founded CUBIX to bring a new standard of quality and professionalism to the Nigerian construction landscape.</p>
-          <div class="fo-socials">
-            <button class="fo-contact" onclick="openWADirect('2347066693803','Arc. Mohammed Sadiq')">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-              WhatsApp
-            </button>
-            <a class="fo-contact" href="https://www.instagram.com/cubix_ng" target="_blank" rel="noopener">Instagram</a>
-          </div>
-        </div>
-      </div>
-      <div class="fo-card rv">
-        <div class="fo-img-wrap rvc"><img src="assets/arc-chimzy.jpeg" alt="Arc. Chimzi Kel-Owhonda" loading="lazy"/></div>
-        <div>
-          <h3 class="fo-name">Arc. Chimzi Kel-Owhonda</h3>
-          <p class="fo-role">Co-Founder · Principal Architect</p>
-          <p class="fo-body">A licensed architect bringing deep real estate experience and building professionalism to every CUBIX project. Arc. Chimzi ensures that your building investment is at its safest — from concept to completion.</p>
-          <div class="fo-socials">
-            <button class="fo-contact" onclick="openWADirect('2347078396158','Arc. Chimzi Kel-Owhonda')">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-              WhatsApp
-            </button>
-            <a class="fo-contact" href="https://www.instagram.com/cubix_ng" target="_blank" rel="noopener">Instagram</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- About body -->
-    <div class="ab-grid">
-      <div>
-        <h2 class="ab-title rv">BUILT WITH<br/><em>PURPOSE.</em></h2>
-        <p class="ab-body rv">CUBIX Homes and Investment Limited is a construction and real estate company founded by two licensed architects with a knack for high-level, precise design, construction, and real estate.</p>
-        <p class="ab-body rv">Over a short period, CUBIX has handled high-profile construction projects across Lagos, Abuja and Port Harcourt — proving that quality and speed are not mutually exclusive.</p>
-        <blockquote class="ab-quote rv">"With a wealth of Real Estate experience and Building Professionalism by the licensed architects in charge, your building investment is at its safest under our belt."</blockquote>
-        <p class="ab-body rv">Founded in July 2024, we set out to build a company that treats every project as a personal statement of excellence. Today, CUBIX has delivered high-profile projects across Nigeria — and this is only the beginning.</p>
-        <div class="ab-stats">
-          <div class="rv"><p class="stn">50<span>+</span></p><p class="stl">Projects Delivered</p></div>
-          <div class="rv"><p class="stn">3<span>+</span></p><p class="stl">States Active</p></div>
-          <div class="rv"><p class="stn">2024</p><p class="stl">Year Founded</p></div>
-          <div class="rv"><p class="stn">100<span>%</span></p><p class="stl">Licensed Architects</p></div>
-        </div>
-      </div>
-      <div class="ab-imgs">
-        <div class="ab-img rvc"><img src="assets/real12.jpg" alt="CUBIX completed residential project" loading="lazy"/></div>
-        <div class="ab-img rvc"><img src="assets/proj-living-room.jpg" alt="CUBIX interior finish" loading="lazy"/></div>
-        <div class="ab-img rvc"><img src="assets/real7.jpg" alt="CUBIX construction in progress" loading="lazy"/></div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- SERVICES -->
 <section id="services" class="sec">
@@ -658,29 +679,6 @@ button{border:none;background:none;cursor:pointer;font-family:inherit;color:inhe
     </div>
   </div>
 </section>
-
-<!-- SECOND SEQUENCE (240 frames) -->
-<!-- PROJECTS -->
-<section id="projects" class="sec">
-  <div class="wrap">
-    <div class="pj-head">
-      <div>
-        <p class="s-label rv">Portfolio</p>
-        <h2 class="pj-title rv">OUR<br/><em>WORK.</em></h2>
-      </div>
-      <p class="rv" style="max-width:240px;font-size:.8rem;font-weight:300;color:var(--silver);line-height:1.8">A selection of completed and ongoing projects across Nigeria.</p>
-    </div>
-    <div class="pj-grid">
-      <div class="pj-card rv"><img src="assets/proj-momo-final.jpg" alt="CUBIX commercial building completed" loading="lazy"/><div class="pj-tag">Completed</div><div class="pj-info"><p class="pj-cat">Commercial · Architecture</p><h3 class="pj-name">MOMO Commercial Building</h3><p class="pj-loc">Nigeria</p><button class="pj-enquire" onclick="openWAProject('MOMO Commercial Building')">Enquire →</button></div></div>
-      <div class="pj-card rv"><img src="assets/proj-hilltop-hotel.jpg" alt="CUBIX Hilltop Hotel redevelopment" loading="lazy"/><div class="pj-tag">Completed</div><div class="pj-info"><p class="pj-cat">Hospitality · Redevelopment</p><h3 class="pj-name">Hilltop Hotel Redevelopment</h3><p class="pj-loc">Nigeria</p><button class="pj-enquire" onclick="openWAProject('Hilltop Hotel Redevelopment')">Enquire →</button></div></div>
-      <div class="pj-card rv"><img src="assets/proj-hilltop-final.jpg" alt="CUBIX Hilltop project final" loading="lazy"/><div class="pj-tag">Completed</div><div class="pj-info"><p class="pj-cat">Construction · Finishing</p><h3 class="pj-name">Hilltop Final Project</h3><p class="pj-loc">Nigeria</p><button class="pj-enquire" onclick="openWAProject('Hilltop Final Project')">Enquire →</button></div></div>
-      <div class="pj-card rv"><img src="assets/proj-lounge-render.jpg" alt="CUBIX Urban Lounge design" loading="lazy"/><div class="pj-tag">Design</div><div class="pj-info"><p class="pj-cat">Interior · Commercial Design</p><h3 class="pj-name">Urban Lounge Concept</h3><p class="pj-loc">Nigeria</p><button class="pj-enquire" onclick="openWAProject('Urban Lounge Design')">Enquire →</button></div></div>
-      <div class="pj-card rv"><img src="assets/proj-living-room.jpg" alt="CUBIX luxury interior" loading="lazy"/><div class="pj-tag">Interior</div><div class="pj-info"><p class="pj-cat">Interior Design · Luxury</p><h3 class="pj-name">Luxury Living Room Finish</h3><p class="pj-loc">Nigeria</p><button class="pj-enquire" onclick="openWAProject('Luxury Interior Design')">Enquire →</button></div></div>
-      <div class="pj-card rv"><img src="assets/proj-momo-render1.jpg" alt="CUBIX MOMO render" loading="lazy"/><div class="pj-tag">Design</div><div class="pj-info"><p class="pj-cat">Architecture · 3D Visualization</p><h3 class="pj-name">MOMO Building — 3D Render</h3><p class="pj-loc">Nigeria</p><button class="pj-enquire" onclick="openWAProject('MOMO Building Render')">Enquire →</button></div></div>
-    </div>
-  </div>
-</section>
-
 
 <!-- FREE CONSULTATION BANNER -->
 <section style="background:var(--gold);padding:5rem 0;text-align:center;position:relative;overflow:hidden;">
