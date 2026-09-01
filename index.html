@@ -1279,18 +1279,14 @@ function preloadHero() {
       hFrames[idx] = this;
       hLoaded++;
       updateProgress(hLoaded);
-      // Show after first frame loads
-      if (!triggered && hLoaded >= 1) {
+      if (!triggered) {
         triggered = true;
         onHeroReady();
       }
     };
     img.onerror = function() {
       hLoaded++;
-      if (!triggered && hLoaded >= 1) {
-        triggered = true;
-        onHeroReady();
-      }
+      if (!triggered) { triggered = true; onHeroReady(); }
     };
     img.src = FRAME_PATH + String(i).padStart(3,'0') + '.jpg';
   }
@@ -1299,14 +1295,16 @@ function preloadHero() {
 
 
 function onHeroReady() {
+  if (hAllReady) return;
   hAllReady = true;
-  drawHero(hFrames[0], hVW, hVH);
-  cancelAnimationFrame(logoRAF);
+  if (hFrames[0]) drawHero(hFrames[0], hVW, hVH);
+  if (logoRAF) cancelAnimationFrame(logoRAF);
+  const ldEl = document.getElementById('loading');
   setTimeout(() => {
-    ldEl.classList.add('out');
+    if (ldEl) ldEl.classList.add('out');
     revealHeroText();
-    setTimeout(() => { initScroll();  }, 400);
-  }, 700);
+    setTimeout(() => { initScroll(); }, 400);
+  }, 600);
 }
 
 function revealHeroText() {
@@ -1524,11 +1522,7 @@ document.getElementById('arch-picker').addEventListener('click', function(e) {
 loadLogoFrames();
 preloadHero();
 // Safety net: show site after 3 seconds max regardless
-setTimeout(function() {
-  if (!document.getElementById('loading').classList.contains('out')) {
-    onHeroReady();
-  }
-}, 3000);
+setTimeout(function() { onHeroReady(); }, 4000);
 </script>
 </body>
 </html>
