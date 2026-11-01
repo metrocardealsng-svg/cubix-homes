@@ -1249,12 +1249,27 @@ function drawHero(img, vw, vh) {
   hCtx.drawImage(img, dx, dy, dw, dh);
 }
 
+function nearestLoadedHeroFrame(target) {
+  if (hFrames[target]) return hFrames[target];
+  for (let distance = 1; distance < FRAME_COUNT; distance++) {
+    const before = target - distance;
+    const after = target + distance;
+    if (before >= 0 && hFrames[before]) return hFrames[before];
+    if (after < FRAME_COUNT && hFrames[after]) return hFrames[after];
+  }
+  return null;
+}
+
 function setHeroFrame(raw) {
   const idx = Math.min(Math.max(Math.round(raw), 0), FRAME_COUNT - 1);
-  if (idx === hCurIdx && hRAF) return;
   hCurIdx = idx;
   if (hRAF) cancelAnimationFrame(hRAF);
-  hRAF = requestAnimationFrame(() => { drawHero(hFrames[hCurIdx], hVW, hVH); hRAF = null; });
+  hRAF = requestAnimationFrame(() => {
+    // Keep the last available frame visible while the requested frame downloads.
+    const frame = nearestLoadedHeroFrame(hCurIdx);
+    if (frame) drawHero(frame, hVW, hVH);
+    hRAF = null;
+  });
 }
 
 /* ==========================================================
@@ -1265,28 +1280,49 @@ const ldPct  = document.getElementById('ld-pct');
 const ldEl   = document.getElementById('loading');
 
 function updateProgress(n) {
-  const p = Math.min(100, Math.round((n / 30) * 100));
+  const p = Math.min(100, Math.round((n / FRAME_COUNT) * 100));
   ldFill.style.width = p + '%';
   ldPct.textContent  = p + '%';
 }
 
-function preloadHero() {
-  var triggered = false;
-  for (let i = 1; i <= FRAME_COUNT; i++) {
+// Limit simultaneous image requests. Loading all 300 full-size frames at once
+// can exhaust browser memory/network queues and leave the canvas showing gaps.
+const HERO_MAX_CONCURRENT_LOADS = 8;
+let heroNextFrameToLoad = 0;
+let heroLoadsInFlight = 0;
+let heroFirstFrameReady = false;
+
+function pumpHeroFrameQueue() {
+  while (heroLoadsInFlight < HERO_MAX_CONCURRENT_LOADS && heroNextFrameToLoad < FRAME_COUNT) {
+    const idx = heroNextFrameToLoad++;
     const img = new Image();
-    const idx = i - 1;
+    heroLoadsInFlight++;
+
     img.onload = function() {
       hFrames[idx] = this;
       hLoaded++;
       updateProgress(hLoaded);
-      if (!triggered) {
-        triggered = true;
+      if (!heroFirstFrameReady) {
+        heroFirstFrameReady = true;
         onHeroReady();
       }
+      heroLoadsInFlight--;
+      pumpHeroFrameQueue();
     };
-    img.onerror = function() { hLoaded++; };
-    img.src = FRAME_PATH + String(i).padStart(3,'0') + '.jpg';
+
+    img.onerror = function() {
+      hLoaded++;
+      updateProgress(hLoaded);
+      heroLoadsInFlight--;
+      pumpHeroFrameQueue();
+    };
+
+    img.src = FRAME_PATH + String(idx + 1).padStart(3, '0') + '.jpg';
   }
+}
+
+function preloadHero() {
+  pumpHeroFrameQueue();
 }
 
 
