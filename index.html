@@ -1330,7 +1330,8 @@ function preloadHero() {
 function onHeroReady() {
   if (hAllReady) return;
   hAllReady = true;
-  if (hFrames[0]) drawHero(hFrames[0], hVW, hVH);
+  const firstAvailableFrame = nearestLoadedHeroFrame(0);
+  if (firstAvailableFrame) drawHero(firstAvailableFrame, hVW, hVH);
   if (logoRAF) cancelAnimationFrame(logoRAF);
   const ldEl = document.getElementById('loading');
   setTimeout(() => {
