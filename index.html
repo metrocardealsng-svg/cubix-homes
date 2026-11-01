@@ -1329,9 +1329,11 @@ function preloadHero() {
 
 function onHeroReady() {
   if (hAllReady) return;
-  hAllReady = true;
   const firstAvailableFrame = nearestLoadedHeroFrame(0);
-  if (firstAvailableFrame) drawHero(firstAvailableFrame, hVW, hVH);
+  // Never dismiss the loader onto an empty canvas if the network is slow.
+  if (!firstAvailableFrame) return;
+  hAllReady = true;
+  drawHero(firstAvailableFrame, hVW, hVH);
   if (logoRAF) cancelAnimationFrame(logoRAF);
   const ldEl = document.getElementById('loading');
   setTimeout(() => {
@@ -1540,7 +1542,8 @@ window.addEventListener('resize', () => {
   clearTimeout(resizeT);
   resizeT = setTimeout(() => {
     hResize(); 
-    if (hFrames[hCurIdx]) drawHero(hFrames[hCurIdx], hVW, hVH);
+    const frame = nearestLoadedHeroFrame(hCurIdx);
+    if (frame) drawHero(frame, hVW, hVH);
     if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
   }, 200);
 });
