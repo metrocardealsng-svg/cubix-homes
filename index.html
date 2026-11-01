@@ -1263,9 +1263,17 @@ function nearestLoadedHeroFrame(target) {
 function setHeroFrame(raw) {
   const idx = Math.min(Math.max(Math.round(raw), 0), FRAME_COUNT - 1);
   hCurIdx = idx;
+
+  // Fetch the requested frame and a small buffer around it, not all 300 frames.
+  queueHeroFrame(idx);
+  for (let offset = 1; offset <= 5; offset++) {
+    if (idx + offset < FRAME_COUNT) queueHeroFrame(idx + offset);
+    if (idx - offset >= 0) queueHeroFrame(idx - offset);
+  }
+
   if (hRAF) cancelAnimationFrame(hRAF);
   hRAF = requestAnimationFrame(() => {
-    // Keep the last available frame visible while the requested frame downloads.
+    // Keep the closest available frame visible while the exact frame downloads.
     const frame = nearestLoadedHeroFrame(hCurIdx);
     if (frame) drawHero(frame, hVW, hVH);
     hRAF = null;
@@ -1280,39 +1288,70 @@ const ldPct  = document.getElementById('ld-pct');
 const ldEl   = document.getElementById('loading');
 
 function updateProgress(n) {
-  const p = Math.min(100, Math.round((n / FRAME_COUNT) * 100));
+  // The loading screen tracks the initial hero buffer, then remains complete.
+  const p = Math.min(100, Math.round((n / 12) * 100));
   ldFill.style.width = p + '%';
   ldPct.textContent  = p + '%';
 }
 
-// Limit simultaneous image requests. Loading all 300 full-size frames at once
-// can exhaust browser memory/network queues and leave the canvas showing gaps.
-const HERO_MAX_CONCURRENT_LOADS = 8;
-let heroNextFrameToLoad = 0;
+// Keep only a small decoded-image window in memory. Decoding hundreds of
+// full-resolution JPEGs at once can exhaust memory, especially on phones.
+const HERO_MAX_CONCURRENT_LOADS = 6;
+const HERO_CACHE_LIMIT = 18;
+const heroFrameQueue = [];
+const heroFrameLoading = new Set();
 let heroLoadsInFlight = 0;
 let heroFirstFrameReady = false;
 
+function trimHeroFrameCache() {
+  const loaded = [];
+  for (let i = 0; i < hFrames.length; i++) {
+    if (hFrames[i]) loaded.push(i);
+  }
+  if (loaded.length <= HERO_CACHE_LIMIT) return;
+
+  loaded.sort((a, b) => Math.abs(b - hCurIdx) - Math.abs(a - hCurIdx));
+  while (loaded.length > HERO_CACHE_LIMIT) {
+    hFrames[loaded.shift()] = null;
+  }
+}
+
+function queueHeroFrame(idx) {
+  if (idx < 0 || idx >= FRAME_COUNT || hFrames[idx] || heroFrameLoading.has(idx) || heroFrameQueue.includes(idx)) return;
+  heroFrameQueue.push(idx);
+  heroFrameQueue.sort((a, b) => Math.abs(a - hCurIdx) - Math.abs(b - hCurIdx));
+  pumpHeroFrameQueue();
+}
+
 function pumpHeroFrameQueue() {
-  while (heroLoadsInFlight < HERO_MAX_CONCURRENT_LOADS && heroNextFrameToLoad < FRAME_COUNT) {
-    const idx = heroNextFrameToLoad++;
+  while (heroLoadsInFlight < HERO_MAX_CONCURRENT_LOADS && heroFrameQueue.length) {
+    const idx = heroFrameQueue.shift();
+    if (hFrames[idx] || heroFrameLoading.has(idx)) continue;
+
     const img = new Image();
+    heroFrameLoading.add(idx);
     heroLoadsInFlight++;
 
     img.onload = function() {
       hFrames[idx] = this;
+      heroFrameLoading.delete(idx);
+      heroLoadsInFlight--;
       hLoaded++;
+      trimHeroFrameCache();
       updateProgress(hLoaded);
+
       if (!heroFirstFrameReady) {
         heroFirstFrameReady = true;
         onHeroReady();
       }
-      heroLoadsInFlight--;
+      if (idx === hCurIdx) {
+        drawHero(this, hVW, hVH);
+      }
       pumpHeroFrameQueue();
     };
 
     img.onerror = function() {
-      hLoaded++;
-      updateProgress(hLoaded);
+      heroFrameLoading.delete(idx);
       heroLoadsInFlight--;
       pumpHeroFrameQueue();
     };
@@ -1322,7 +1361,8 @@ function pumpHeroFrameQueue() {
 }
 
 function preloadHero() {
-  pumpHeroFrameQueue();
+  // A short opening buffer is enough to reveal the hero without delaying the page.
+  for (let i = 0; i < 12; i++) queueHeroFrame(i);
 }
 
 
